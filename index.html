@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>הierogamΩ</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Huvudmeny -->
+    <div id="main-menu">
+      <h1>הierogamΩ</h1>
+      <button id="new-game-btn">New Game</button>
+      <button id="settings-btn">Settings</button>
+      <button id="highscore-btn">High Score</button>
+<br><br>
+Spelets syfte är att lära sig skriva med tangentbord, bibelgrekiska och bibelhebreiska.<br>
+Tanken är att utveckla spelet att inkludera formbestämningar och översättningar, i denna första version
+är det dock bara alfabeten.<br>
+<br>
+Du spelar genom att klicka "New game" och därefter hur många ord du vill testa. Du skriver nere till vänster.<br><br>Allting lagras hos dig, så du "spelar" bara mot dig själv.<br><br>
+<h4>Feedback? Mail to hierogamos@ensa.se</h4>
+    </div>
+
+    <!-- Inställningar -->
+    <div id="settings-screen" class="hidden">
+      <h2>Inställningar</h2>
+      
+      <div class="settings-group">
+        <h3>Spelreglage</h3>
+        <div class="settings-row">
+          <label for="speed-setting">Hastighet:</label>
+          <input type="range" id="speed-setting" min="1" max="10" value="1" step="1">
+          <span id="speed-value">1</span>
+        </div>
+      </div>
+      
+      <div class="settings-group">
+        <h3>Språkinställningar</h3>
+        <div class="settings-row">
+          <div class="radio-group">
+            <div class="radio-option">
+              <input type="radio" id="lang-all" name="language" value="All" checked>
+              <label for="lang-all">Alla</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="lang-hebrew" name="language" value="Hebrew">
+              <label for="lang-hebrew">Hebreiska</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="lang-greek" name="language" value="Greek">
+              <label for="lang-greek">Grekiska</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="settings-group">
+        <h3>Importera Ordlista (CSV)</h3>
+        <div class="settings-row">
+          <input type="file" id="csv-import" accept=".csv">
+        </div>
+        <p id="csv-status"></p>
+      </div>
+      
+      <button id="save-settings-btn">Spara & Tillbaka</button>
+      <button id="back-from-settings-btn">Tillbaka</button>
+    </div>
+
+    <!-- High Score -->
+    <div id="highscore-screen" class="hidden">
+      <h2>High Score</h2>
+      <ol id="highscore-list">
+        <!-- Highscore-listan genereras av JavaScript -->
+      </ol>
+      <button id="back-from-highscore-btn">Back</button>
+    </div>
+
+    <!-- Spelskärm -->
+    <div id="game-screen" class="hidden">
+      <div id="score-container">
+        <div id="score-display">Points: 0</div>
+      </div>
+      
+      <div id="game-area">
+        <!-- Fallande ord placeras här av JavaScript -->
+      </div>
+      
+      <div id="input-area">
+        <div class="input-group">
+          <label for="input-word">Skriv av:</label>
+          <input type="text" id="input-word" autocomplete="off">
+        </div>
+        <div class="input-group">
+          <label for="input-form">Form:</label>
+          <input type="text" id="input-form" autocomplete="off">
+        </div>
+        <div class="input-group">
+          <label for="input-translation">Översättning:</label>
+          <input type="text" id="input-translation" autocomplete="off">
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over -->
+    <div id="game-over-screen" class="hidden">
+      <h2>Game Over</h2>
+      <div id="game-over-message">Bra kämpat!</div>
+      
+      <div id="highscore-entry" class="hidden">
+        <h3>Ny High Score!</h3>
+        <p>Name/initials:</p>
+        <input type="text" id="highscore-initials" maxlength="3">
+        <button id="save-highscore-btn">Save High Score</button>
+      </div>
+      
+      <button id="back-to-menu-btn">Exit to Menu</button>
+    </div>
+  </div>
+
+  <!-- Modulerna laddas med type="module" för att aktivera ES6-modulsupport -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

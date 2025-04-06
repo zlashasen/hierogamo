@@ -1,0 +1,416 @@
+.game-over-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 90;
+  }.speed-bonus {
+    color: #d35400;
+    font-weight: bold;
+    font-style: italic;
+  }/* Grundläggande stilar */
+  :root {
+    --primary-color: #3c5a99;
+    --secondary-color: #8b9dc3;
+    --background-color: #f7f7f7;
+    --game-background: #fff;
+    --text-color: #333;
+    --error-color: #e74c3c;
+    --success-color: #2ecc71;
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  h1, h2, h3 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: var(--secondary-color);
+  }
+  
+  /* Dölj skärmar */
+  .hidden {
+    display: none !important;
+  }
+  
+  /* Huvudmeny */
+  #main-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  #main-menu h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+  }
+  
+  #main-menu button {
+    width: 200px;
+    margin: 10px;
+  }
+  
+  /* Inställningar */
+  #settings-screen {
+    width: 100%;
+  }
+  
+  .settings-group {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: var(--game-background);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .settings-group h3 {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .settings-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .settings-row label {
+    flex: 1;
+  }
+  
+  .settings-row input[type="range"] {
+    flex: 2;
+    margin: 0 10px;
+  }
+  
+  .settings-row input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+  }
+  
+  .radio-group {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .radio-option {
+    display: flex;
+    align-items: center;
+  }
+  
+  .radio-option input {
+    margin-right: 5px;
+  }
+  
+  #csv-status {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--background-color);
+  }
+  
+  /* High Score */
+  #highscore-screen {
+    width: 100%;
+  }
+  
+  #highscore-list {
+    width: 100%;
+    list-style-position: inside;
+    counter-reset: highscore-counter;
+    margin-bottom: 20px;
+  }
+  
+  #highscore-list li {
+    background-color: var(--game-background);
+    margin-bottom: 8px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  #highscore-list li::before {
+    content: counter(highscore-counter) ". ";
+    counter-increment: highscore-counter;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .highscore-initials {
+    font-weight: bold;
+    min-width: 50px;
+    flex: 1;
+  }
+  
+  .highscore-score {
+    font-weight: bold;
+    min-width: 80px;
+    text-align: right;
+    flex: 1;
+  }
+  
+  .highscore-words {
+    color: var(--primary-color);
+    min-width: 30px;
+    text-align: center;
+    font-weight: bold;
+    flex: 0.5;
+  }
+  
+  .highscore-language {
+    color: var(--secondary-color);
+    min-width: 80px;
+    text-align: center;
+    flex: 1;
+  }
+  
+  /* Spelskärm */
+  #game-screen {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+  
+  #score-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+  #score-display {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  #game-area {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-color: var(--game-background);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  
+  .falling-word {
+    position: absolute;
+    font-size: 36px;
+    transform: translateX(-50%);
+    text-align: center;
+    padding: 8px 14px;
+    background-color: var(--background-color);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    line-height: 1.3;
+  }
+  
+  .info-popup {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 5px;
+    padding: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 0.3s, fadeOut 0.3s 1.2s forwards;
+    z-index: 2;
+    font-size: 18px;
+  }
+  
+  .game-over-popup {
+    background-color: rgba(220, 220, 220, 0.95);
+    padding: 20px 25px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
+    border: 3px solid var(--error-color);
+    animation: fadeIn 0.3s, fadeOut 0.3s 1.7s forwards;
+    font-size: 22px;
+    z-index: 100;
+    min-width: 250px;
+    max-width: 90%;
+    transform: translate(-50%, -50%);
+    left: 50% !important;
+    top: 50% !important;
+    position: absolute;
+  }
+  
+  .missed-word {
+    font-size: 48px;
+    font-weight: bold;
+    color: var(--error-color);
+    display: block;
+    margin: 15px 0;
+    padding: 10px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 5px;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  
+  .word-explosion {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle, var(--success-color) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 2;
+    animation: explode 0.5s forwards;
+    transform: translate(-50%, -50%);
+  }
+  
+  @keyframes explode {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(4); opacity: 0; }
+  }
+  
+  #input-area {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-group label {
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+  
+  .input-group input {
+    padding: 10px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  
+  .shake {
+    animation: shake 0.5s;
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+  }
+  
+  /* Game Over */
+  #game-over-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+  
+  #game-over-message {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+  }
+  
+  #highscore-entry {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: var(--game-background);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  #highscore-entry input {
+    padding: 10px;
+    font-size: 18px;
+    text-align: center;
+    width: 100px;
+    text-transform: uppercase;
+    margin: 10px 0;
+  }
+  
+  /* Responsivitet */
+  @media (max-width: 600px) {
+    #input-area {
+      flex-direction: column;
+    }
+    
+    .settings-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .settings-row input[type="range"] {
+      width: 100%;
+      margin: 10px 0;
+    }
+    
+    .radio-group {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
